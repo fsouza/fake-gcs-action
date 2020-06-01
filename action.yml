@@ -1,0 +1,33 @@
+name: "Start fake-gcs-server"
+description: "Starts fake-gcs-server as configured in the parameters."
+author: "Francisco Souza"
+inputs:
+  version:
+    description: "Version of fake-gcs-server to use"
+    required: false
+    default: "1"
+  # The inputs below match flags in fake-gcs-server, for more details on them,
+  # check the docs for fake-gcs-server at
+  # https://github.com/fsouza/fake-gcs-server.
+  backend:
+    description: "Storage backend for fake-gcs-server"
+    required: false
+    default: "memory"
+  data:
+    description: "Optional directory indicating where to load data from"
+    required: false
+    default: ""
+  external-url:
+    description: "Optional external URL, returned in the Location header for uploads. Defaults to the address where the server is running"
+    required: false
+    default: ""
+  public-host:
+    description: "Optional hostname to use as the public host for download endpoints"
+    required: false
+    default: ""
+runs:
+  using: "docker"
+  image: "Dockerfile"
+branding:
+  icon: "database"
+  color: "purple"
