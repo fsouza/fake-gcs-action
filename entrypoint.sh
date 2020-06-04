@@ -9,6 +9,9 @@ docker_args=(
 	--publish 4443:4443
 )
 
+INPUT_EXTERNAL_URL=$(printenv INPUT_EXTERNAL-URL)
+INPUT_PUBLIC_HOST=$(printenv INPUT_PUBLIC-HOST)
+
 docker_image=fsouza/fake-gcs-server:${INPUT_VERSION}
 
 if [ -n "${INPUT_DATA}" ]; then
