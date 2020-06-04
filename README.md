@@ -15,8 +15,8 @@ steps:
       version: "1.19.3"
       backend: memory
       data: ./testdata
-      public-host: "storage.gcs.127.0.0.1.nip.io:8443"
-      external-url: "https://storage.gcs.127.0.0.1.nip.io:8443"
+      public-host: "storage.gcs.127.0.0.1.nip.io:4443"
+      external-url: "https://storage.gcs.127.0.0.1.nip.io:4443"
 ```
 
 ## Usage
