@@ -3,10 +3,13 @@
 args=(
 	-backend "${INPUT_BACKEND}"
 )
+
 docker_args=(
 	--detach
-	--publish 8443:8443
+	--publish 4443:4443
 )
+
+docker_image=fsouza/fake-gcs-server:${INPUT_VERSION}
 
 if [ -n "${INPUT_DATA}" ]; then
 	INPUT_DATA=$(realpath "${INPUT_DATA}")
@@ -22,4 +25,14 @@ if [ -n "${INPUT_PUBLIC_HOST}" ]; then
 	args+=(-public-host "${INPUT_PUBLIC_HOST}")
 fi
 
-exec docker run "${docker_args[@]}" "fsouza/fake-gcs-server:${INPUT_VERSION}" "${args[@]}"
+docker pull "${docker_image}"
+container_id=$(docker run "${docker_args[@]}" "${docker_image}" "${args[@]}")
+
+timeout=10
+echo "waiting up to ${timeout}s for server to come up"
+if ! timeout -t 10 bash -c 'while ! wget -qO /dev/null -T 1 --no-check-certificate https://127.0.0.1:4443/storage/v1/b; do echo server not available; sleep 1; done'; then
+	echo "Failed to connect to the server after ${timeout}s" >&2
+	echo "Logs from docker: " >&2
+	docker logs "${container_id}"
+	exit 1
+fi
