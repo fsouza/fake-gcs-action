@@ -1,0 +1,33 @@
+name: Build
+on:
+  schedule:
+    - cron: "21 2 * * 2"
+
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test-file:
+    name: Start server and run curl commands
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: ./
+        with:
+          data: ./testdata
+          public-host: "storage.gcs.127.0.0.1.nip.io:8443"
+          external-url: "https://storage.gcs.127.0.0.1.nip.io:8443"
+
+      - name: download file with curl
+        shell: bash
+        run: |
+          echo "List of buckets:"
+          curl --silent --fail --insecure https://storage.gcs.127.0.0.1.nip.io.8443/storage/v1/b
+          echo "Files in the bucket:"
+          curl --silent --fail --insecure https://storage.gcs.127.0.0.1.nip.io.8443/storage/v1/b/some-bucket/o
