@@ -24,7 +24,7 @@ jobs:
           public-host: "storage.gcs.127.0.0.1.nip.io:8443"
           external-url: "https://storage.gcs.127.0.0.1.nip.io:8443"
 
-      - name: download file with curl
+      - name: list buckets and objects with curl
         shell: bash
         run: |
           echo "List of buckets:"
