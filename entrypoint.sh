@@ -22,4 +22,4 @@ if [ -n "${INPUT_PUBLIC_HOST}" ]; then
 	args+=(-public-host "${INPUT_PUBLIC_HOST}")
 fi
 
-exec docker run "${docker_args[@]}" "fsouza/fake-gcs-version:${INPUT_VERSION}" "${args[@]}"
+exec docker run "${docker_args[@]}" "fsouza/fake-gcs-server:${INPUT_VERSION}" "${args[@]}"
