@@ -28,6 +28,8 @@ fi
 docker pull "${docker_image}"
 container_id=$(docker run "${docker_args[@]}" "${docker_image}" "${args[@]}")
 
+docker ps "${container_id}"
+
 timeout=10
 echo "waiting up to ${timeout}s for server to come up"
 if ! timeout 10 bash -c 'while ! wget -qO /dev/null -T 1 --no-check-certificate https://127.0.0.1:4443/storage/v1/b; do echo server not available; sleep 1; done'; then
