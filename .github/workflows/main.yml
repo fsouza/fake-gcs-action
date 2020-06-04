@@ -26,13 +26,13 @@ jobs:
       - uses: ./
         with:
           data: ./testdata
-          public-host: "storage.gcs.127.0.0.1.nip.io:8443"
-          external-url: "https://storage.gcs.127.0.0.1.nip.io:8443"
+          public-host: "storage.gcs.127.0.0.1.nip.io:4443"
+          external-url: "https://storage.gcs.127.0.0.1.nip.io:4443"
 
       - name: list buckets and objects with curl
         shell: bash
         run: |
           echo "List of buckets:"
-          curl --verbose --fail --insecure https://storage.gcs.127.0.0.1.nip.io:8443/storage/v1/b
+          curl --verbose --fail --insecure https://storage.gcs.127.0.0.1.nip.io:4443/storage/v1/b
           echo "Files in the bucket:"
-          curl --verbose --fail --insecure https://storage.gcs.127.0.0.1.nip.io:8443/storage/v1/b/some-bucket/o
+          curl --verbose --fail --insecure https://storage.gcs.127.0.0.1.nip.io:4443/storage/v1/b/some-bucket/o
