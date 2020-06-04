@@ -28,7 +28,7 @@ fi
 docker pull "${docker_image}"
 container_id=$(docker run "${docker_args[@]}" "${docker_image}" "${args[@]}")
 
-docker ps "${container_id}"
+docker ps --latest
 
 timeout=10
 echo "waiting up to ${timeout}s for server to come up"
