@@ -12,11 +12,16 @@ on:
       - master
 
 jobs:
-  test-file:
-    name: Start server and run curl commands
+  run-tests:
+    name: Validate entrypoint.sh & test the action
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - name: install shellcheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+
+      - run: shellcheck entrypoint.sh
 
       - uses: ./
         with:
