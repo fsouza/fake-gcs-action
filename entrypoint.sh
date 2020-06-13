@@ -1,7 +1,5 @@
 #!/bin/bash -e
 
-cd /github/workspace
-
 args=(
 	-backend "${INPUT_BACKEND}"
 )
@@ -22,7 +20,8 @@ if [ -n "${INPUT_DATA}" ]; then
 		exit 2
 	fi
 
-	INPUT_DATA=$(realpath "${INPUT_DATA}")
+	echo $RUNNER_WORKSPACE
+	INPUT_DATA=${RUNNER_WORKSPACE}/${INPUT_DATA}
 	args+=(-data "${INPUT_DATA}" )
 	docker_args+=(--volume "${INPUT_DATA}:${INPUT_DATA}")
 fi
