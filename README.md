@@ -1,5 +1,7 @@
 # Start fake-gcs-server
 
+![Build](https://github.com/fsouza/fake-gcs-action/workflows/Build/badge.svg?branch=master)
+
 This action is used for starting
 [fake-gcs-server](https://github.com/fsouza/fake-gcs-server) in background, as
 a Docker container. It starts on port 4443 and supports configuration options
