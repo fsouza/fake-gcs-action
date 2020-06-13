@@ -33,6 +33,6 @@ jobs:
         shell: bash
         run: |
           echo "List of buckets:"
-          curl --verbose --fail --insecure https://storage.gcs.127.0.0.1.nip.io:4443/storage/v1/b
+          curl --fail --insecure https://storage.gcs.127.0.0.1.nip.io:4443/storage/v1/b
           echo "Files in the bucket:"
-          curl --verbose --fail --insecure https://storage.gcs.127.0.0.1.nip.io:4443/storage/v1/b/some-bucket/o
+          curl --fail --insecure https://storage.gcs.127.0.0.1.nip.io:4443/storage/v1/b/some-bucket/o
