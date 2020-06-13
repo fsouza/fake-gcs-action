@@ -21,6 +21,7 @@ if [ -n "${INPUT_DATA}" ]; then
 	fi
 
 	echo $RUNNER_WORKSPACE
+	echo $GITHUB_WORKSPACE
 	INPUT_DATA=${RUNNER_WORKSPACE}/${INPUT_DATA}
 	args+=(-data "${INPUT_DATA}" )
 	docker_args+=(--volume "${INPUT_DATA}:${INPUT_DATA}")
