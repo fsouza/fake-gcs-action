@@ -17,4 +17,4 @@ if [ -n "${INPUT_PUBLIC_HOST}" ]; then
 	args+=(-public-host "${INPUT_PUBLIC_HOST}")
 fi
 
-exec docker run -d --port 4443:4443 "fsouza/fake-gcs-version:${INPUT_VERSION}" "${args[@]}"
+exec docker run -d -p 4443:4443 "fsouza/fake-gcs-version:${INPUT_VERSION}" "${args[@]}"
