@@ -14,7 +14,7 @@ inputs:
     required: false
     default: "memory"
   data:
-    description: "Optional directory indicating where to load data from"
+    description: "Optional directory indicating where to load data from. Must be relative to the workspace"
     required: false
     default: ""
   external-url:
