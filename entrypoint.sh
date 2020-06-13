@@ -20,9 +20,10 @@ if [ -n "${INPUT_DATA}" ]; then
 		exit 2
 	fi
 
-	echo "$RUNNER_WORKSPACE"
-	echo "$GITHUB_WORKSPACE"
-	INPUT_DATA=${RUNNER_WORKSPACE}/${INPUT_DATA}
+	if [ -n "${INPUT_DEBUG}" ]; then
+		echo "RUNNER_WORKSPACE=${RUNNER_WORKSPACE}"
+	fi
+	INPUT_DATA=${RUNNER_WORKSPACE}/fake-gcs-action/${INPUT_DATA}
 	args+=(-data "${INPUT_DATA}" )
 	docker_args+=(--volume "${INPUT_DATA}:${INPUT_DATA}")
 fi
