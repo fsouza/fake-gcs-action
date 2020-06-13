@@ -28,6 +28,7 @@ jobs:
           data: ./testdata
           public-host: "storage.gcs.127.0.0.1.nip.io:4443"
           external-url: "https://storage.gcs.127.0.0.1.nip.io:4443"
+          debug: 1
 
       - name: list buckets and objects with curl
         shell: bash

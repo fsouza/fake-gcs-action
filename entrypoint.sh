@@ -46,3 +46,9 @@ if ! timeout 10 bash -c 'while ! docker exec '"${container_id}"' wget -qO /dev/n
 	docker logs "${container_id}"
 	exit 1
 fi
+
+echo "Server started successfully!"
+if [ -n "${INPUT_DEBUG}" ]; then
+	echo "Logs from container: "
+	docker logs "${container_id}"
+fi

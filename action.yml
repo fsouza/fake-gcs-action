@@ -25,6 +25,10 @@ inputs:
     description: "Optional hostname to use as the public host for download endpoints"
     required: false
     default: ""
+  debug:
+    description: "Set it to true to see server logs after start and more debugging information"
+    required: false
+    default: ""
 runs:
   using: "docker"
   image: "Dockerfile"
