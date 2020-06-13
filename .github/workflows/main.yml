@@ -1,0 +1,39 @@
+name: Build
+on:
+  schedule:
+    - cron: "21 2 * * 2"
+
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  run-tests:
+    name: Validate entrypoint.sh & test the action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: install shellcheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+
+      - run: shellcheck entrypoint.sh
+
+      - uses: ./
+        with:
+          data: ./testdata
+          public-host: "storage.gcs.127.0.0.1.nip.io:4443"
+          external-url: "https://storage.gcs.127.0.0.1.nip.io:4443"
+          debug: 1
+
+      - name: list buckets and objects with curl
+        shell: bash
+        run: |
+          echo "List of buckets:"
+          curl --fail --insecure https://storage.gcs.127.0.0.1.nip.io:4443/storage/v1/b
+          echo "Files in the bucket:"
+          curl --fail --insecure https://storage.gcs.127.0.0.1.nip.io:4443/storage/v1/b/some-bucket/o
