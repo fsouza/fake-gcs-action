@@ -20,7 +20,6 @@ if [ -n "${INPUT_DATA}" ]; then
 		echo "RUNNER_WORKSPACE=${RUNNER_WORKSPACE}"
 		echo "GITHUB_WORKSPACE=${GITHUB_WORKSPACE}"
 		echo "HOME=${HOME}"
-		env
 	fi
 
 	# RUNNER_WORKSPACE won't be populated at this point, so check the directory
