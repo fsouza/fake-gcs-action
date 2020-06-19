@@ -1,6 +1,6 @@
 # Start fake-gcs-server
 
-[![Build Status](https://github.com/fsouza/fake-gcs-action/workflows/Build/badge.svg?branch=master)](https://github.com/fsouza/fake-gcs-action/actions?query=branch:master+workflow:Build)
+[![Build Status](https://github.com/fsouza/fake-gcs-action/workflows/Build/badge.svg?branch=main)](https://github.com/fsouza/fake-gcs-action/actions?query=branch:main+workflow:Build)
 
 This action is used for starting
 [fake-gcs-server](https://github.com/fsouza/fake-gcs-server) in background, as
