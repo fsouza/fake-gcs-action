@@ -10,23 +10,23 @@ inputs:
   # check the docs for fake-gcs-server at
   # https://github.com/fsouza/fake-gcs-server.
   backend:
-    description: "Storage backend for fake-gcs-server"
+    description: "Storage backend for fake-gcs-server."
     required: false
     default: "memory"
   data:
-    description: "Optional directory indicating where to load data from. Must be relative to the workspace"
+    description: "Optional directory indicating where to load data from. Must be relative to the workspace, so make sure actions/checkout runs first."
     required: false
     default: ""
   external-url:
-    description: "Optional external URL, returned in the Location header for uploads. Defaults to the address where the server is running"
+    description: "Optional external URL, returned in the Location header for uploads. Defaults to the address where the server is running."
     required: false
     default: ""
   public-host:
-    description: "Optional hostname to use as the public host for download endpoints"
+    description: "Optional hostname to use as the public host for download endpoints."
     required: false
     default: ""
   debug:
-    description: "Set it to true to see server logs after start and more debugging information"
+    description: "Set it to true to see server logs after start and more debugging information."
     required: false
     default: ""
 runs:

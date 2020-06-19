@@ -15,17 +15,30 @@ INPUT_PUBLIC_HOST=$(printenv INPUT_PUBLIC-HOST)
 docker_image=fsouza/fake-gcs-server:${INPUT_VERSION}
 
 if [ -n "${INPUT_DATA}" ]; then
-	if ! [ -d "${INPUT_DATA}" ]; then
+	if [ -n "${INPUT_DEBUG}" ]; then
+		echo "INPUT_DATA=${INPUT_DATA}"
+		echo "RUNNER_WORKSPACE=${RUNNER_WORKSPACE}"
+		echo "GITHUB_WORKSPACE=${GITHUB_WORKSPACE}"
+		echo "HOME=${HOME}"
+	fi
+
+	# RUNNER_WORKSPACE won't be populated at this point, so check the directory
+	# relative to GITHUB_WORKSPACE.
+	if ! [ -d "${GITHUB_WORKSPACE}/${INPUT_DATA}" ]; then
 		echo "ERROR: input data should be a directory. Make sure it exists and is specified as a relative path" >&2
 		exit 2
 	fi
 
-	if [ -n "${INPUT_DEBUG}" ]; then
-		echo "RUNNER_WORKSPACE=${RUNNER_WORKSPACE}"
-	fi
-	INPUT_DATA=${RUNNER_WORKSPACE}/fake-gcs-action/${INPUT_DATA}
-	args+=(-data "${INPUT_DATA}" )
-	docker_args+=(--volume "${INPUT_DATA}:${INPUT_DATA}")
+	# Github doesn't give us the repository name directly, so figure it out on
+	# our own.
+	REPOSITORY_NAME="${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}"
+	
+	# Build a data path relative to RUNNER_WORKSPACE, including the repository
+	# name that wasn't included in GITHUB_WORKSPACE.
+	DATA_PATH="${RUNNER_WORKSPACE}/${REPOSITORY_NAME}/${INPUT_DATA}"
+
+	args+=(-data "${DATA_PATH}" )
+	docker_args+=(--volume "${DATA_PATH}:${DATA_PATH}")
 fi
 
 if [ -n "${INPUT_EXTERNAL_URL}" ]; then
