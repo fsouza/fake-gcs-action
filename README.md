@@ -12,9 +12,9 @@ for `-public-host` and `-external-url`.
 ```yaml
 steps:
   - uses: actions/checkout@v2
-  - uses: fsouza/fake-gcs-action@v0.3.1
+  - uses: fsouza/fake-gcs-action@v0.3.2
     with:
-      version: "1.19.4"
+      version: "1.22.2"
       backend: memory
       data: testdata
       public-host: "storage.gcs.127.0.0.1.nip.io:4443"
