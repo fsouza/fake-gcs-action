@@ -1,4 +1,4 @@
-FROM docker:20.10.7
+FROM docker:20.10.8
 
 RUN apk add --no-cache bash
 ADD entrypoint.sh /
