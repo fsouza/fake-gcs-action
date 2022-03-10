@@ -5,7 +5,8 @@
 This action is used for starting
 [fake-gcs-server](https://github.com/fsouza/fake-gcs-server) in background, as
 a Docker container. It starts on port 4443 and supports configuration options
-for `-public-host` and `-external-url`.
+for `-public-host`, `-external-url`, `-port`, `-scheme`, `-cert-location` and
+`-private-key-location`:
 
 ## Examples
 
