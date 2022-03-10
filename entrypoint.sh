@@ -58,7 +58,7 @@ container_id=$(docker run "${docker_args[@]}" "${docker_image}" "${args[@]}")
 
 timeout=10
 echo "waiting up to ${timeout}s for server to come up"
-if ! timeout 10 bash -c 'while ! docker exec '"${container_id}"' wget -qO /dev/null -T 1 --no-check-certificate https://0.0.0.0:4443/storage/v1/b; do echo "server not available yet, sleeping..."; sleep 1; done'; then
+if ! timeout 10 bash -c 'while ! docker exec '"${container_id}"' wget -qO /dev/null -T 1 --no-check-certificate '"${INPUT_SCHEME}"'://0.0.0.0:'"${INPUT_PORT}"'/storage/v1/b; do echo "server not available yet, sleeping..."; sleep 1; done'; then
 	echo "Failed to connect to the server after ${timeout}s" >&2
 	echo "Logs from docker: " >&2
 	docker logs "${container_id}"
