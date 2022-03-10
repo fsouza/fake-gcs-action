@@ -13,6 +13,12 @@ on:
 
 jobs:
   run-tests:
+    strategy:
+      matrix:
+        scheme:
+          - http
+          - https
+
     name: Validate entrypoint.sh & test the action
     runs-on: ubuntu-latest
     steps:
@@ -27,13 +33,16 @@ jobs:
         with:
           data: testdata
           public-host: "storage.gcs.127.0.0.1.nip.io:4443"
-          external-url: "https://storage.gcs.127.0.0.1.nip.io:4443"
+          external-url: "${{ matrix.scheme }}://storage.gcs.127.0.0.1.nip.io:4443"
+          scheme: ${{ matrix.scheme }}
           debug: 1
 
       - name: list buckets and objects with curl
         shell: bash
         run: |
           echo "List of buckets:"
-          curl --silent --fail --insecure https://storage.gcs.127.0.0.1.nip.io:4443/storage/v1/b
+          curl --silent --fail --insecure ${FAKE_GCS_SERVER_SCHEME}://storage.gcs.127.0.0.1.nip.io:4443/storage/v1/b
           echo "Files in the bucket:"
-          curl --silent --fail --insecure https://storage.gcs.127.0.0.1.nip.io:4443/storage/v1/b/some-bucket/o
+          curl --silent --fail --insecure ${FAKE_GCS_SERVER_SCHEME}://storage.gcs.127.0.0.1.nip.io:4443/storage/v1/b/some-bucket/o
+        env:
+          FAKE_GCS_SERVER_SCHEME: ${{ matrix.scheme }}
