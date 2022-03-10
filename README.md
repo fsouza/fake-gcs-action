@@ -14,11 +14,12 @@ steps:
   - uses: actions/checkout@v2
   - uses: fsouza/fake-gcs-action@v0.4.0
     with:
-      version: "1.22.2"
+      version: "1.37.0"
       backend: memory
       data: testdata
       public-host: "storage.gcs.127.0.0.1.nip.io:4443"
-      external-url: "https://storage.gcs.127.0.0.1.nip.io:4443"
+      external-url: "http://storage.gcs.127.0.0.1.nip.io:4443"
+      scheme: http
 ```
 
 ## Usage
