@@ -12,7 +12,7 @@ for `-public-host` and `-external-url`.
 ```yaml
 steps:
   - uses: actions/checkout@v2
-  - uses: fsouza/fake-gcs-action@v0.3.3
+  - uses: fsouza/fake-gcs-action@v0.4.0
     with:
       version: "1.22.2"
       backend: memory
