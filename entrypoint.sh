@@ -2,6 +2,10 @@
 
 args=(
 	-backend "${INPUT_BACKEND}"
+	-cert-location "$(printenv INPUT_CERT-LOCATION)"
+	-private-key-location "$(printenv INPUT_PRIVATE-KEY-LOCATION)"
+	-port "${INPUT_PORT}"
+	-scheme "${INPUT_SCHEME}"
 )
 
 docker_args=(
@@ -32,12 +36,12 @@ if [ -n "${INPUT_DATA}" ]; then
 	# Github doesn't give us the repository name directly, so figure it out on
 	# our own.
 	REPOSITORY_NAME="${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}"
-	
+
 	# Build a data path relative to RUNNER_WORKSPACE, including the repository
 	# name that wasn't included in GITHUB_WORKSPACE.
 	DATA_PATH="${RUNNER_WORKSPACE}/${REPOSITORY_NAME}/${INPUT_DATA}"
 
-	args+=(-data "${DATA_PATH}" )
+	args+=(-data "${DATA_PATH}")
 	docker_args+=(--volume "${DATA_PATH}:${DATA_PATH}")
 fi
 

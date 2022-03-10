@@ -29,6 +29,22 @@ inputs:
     description: "Set it to true to see server logs after start and more debugging information."
     required: false
     default: ""
+  scheme:
+    description: "value for the -scheme flag (can be either 'http' or 'https')"
+    required: false
+    default: "https"
+  port:
+    description: "value for the -port flag"
+    required: false
+    default: "4443"
+  cert-location:
+    description: "value for the -cert-location flag"
+    required: false
+    default: ""
+  private-key-location:
+    description: "value for the -private-key-location flag"
+    required: false
+    default: ""
 runs:
   using: "docker"
   image: "Dockerfile"
