@@ -35,7 +35,7 @@ if [ -n "${INPUT_DATA}" ]; then
 
 	# Github doesn't give us the repository name directly, so figure it out on
 	# our own.
-	REPOSITORY_NAME="${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}"
+	REPOSITORY_NAME="${GITHUB_REPOSITORY#"${GITHUB_REPOSITORY_OWNER}"/}"
 
 	# Build a data path relative to RUNNER_WORKSPACE, including the repository
 	# name that wasn't included in GITHUB_WORKSPACE.
