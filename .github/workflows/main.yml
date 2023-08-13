@@ -31,6 +31,9 @@ jobs:
         scheme:
           - http
           - https
+        port:
+          - 4443
+          - 5001
 
     name: Test the action
     runs-on: ubuntu-latest
@@ -40,17 +43,18 @@ jobs:
       - uses: ./
         with:
           data: testdata
-          public-host: "storage.gcs.127.0.0.1.nip.io:4443"
-          external-url: "${{ matrix.scheme }}://storage.gcs.127.0.0.1.nip.io:4443"
+          public-host: "storage.gcs.127.0.0.1.nip.io:${{ matrix.port }}"
+          external-url: "${{ matrix.scheme }}://storage.gcs.127.0.0.1.nip.io:${{ matrix.port }}"
           scheme: ${{ matrix.scheme }}
+          port: ${{ matrix.port }}
           debug: 1
 
       - name: list buckets and objects with curl
         shell: bash
         run: |
           echo "List of buckets:"
-          curl --silent --fail --insecure ${FAKE_GCS_SERVER_SCHEME}://storage.gcs.127.0.0.1.nip.io:4443/storage/v1/b
+          curl --silent --fail --insecure ${FAKE_GCS_SERVER_SCHEME}://storage.gcs.127.0.0.1.nip.io:${{ matrix.port }}/storage/v1/b
           echo "Files in the bucket:"
-          curl --silent --fail --insecure ${FAKE_GCS_SERVER_SCHEME}://storage.gcs.127.0.0.1.nip.io:4443/storage/v1/b/some-bucket/o
+          curl --silent --fail --insecure ${FAKE_GCS_SERVER_SCHEME}://storage.gcs.127.0.0.1.nip.io:${{ matrix.port }}/storage/v1/b/some-bucket/o
         env:
           FAKE_GCS_SERVER_SCHEME: ${{ matrix.scheme }}
