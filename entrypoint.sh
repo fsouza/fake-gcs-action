@@ -10,7 +10,7 @@ args=(
 
 docker_args=(
 	--detach
-	--publish 4443:4443
+	--publish "${INPUT_PORT}":"${INPUT_PORT}"
 )
 
 INPUT_EXTERNAL_URL=$(printenv INPUT_EXTERNAL-URL)
