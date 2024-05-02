@@ -1,4 +1,4 @@
-FROM docker:26.1.0
+FROM docker:26.1.1
 
 RUN apk add --no-cache bash
 ADD entrypoint.sh /
