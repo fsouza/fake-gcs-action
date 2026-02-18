@@ -13,9 +13,9 @@ for `-public-host`, `-external-url`, `-port`, `-scheme`, `-cert-location` and
 ```yaml
 steps:
   - uses: actions/checkout@v2
-  - uses: fsouza/fake-gcs-action@v0.4.1
+  - uses: fsouza/fake-gcs-action@v0.4.2
     with:
-      version: "1.37.2"
+      version: "1.54.0"
       backend: memory
       data: testdata
       public-host: "storage.gcs.127.0.0.1.nip.io:4443"
